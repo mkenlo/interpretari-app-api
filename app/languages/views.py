@@ -10,7 +10,7 @@ class LanguageList(ListCreateAPIView):
     queryset = Languages.objects.all()
     
     def get_queryset(self):
-        lang_type = self.request.query_params.get('language_type')
+        lang_type = self.request.query_params.get('type')
         queryset = Languages.objects.all()
         if lang_type:
             queryset = queryset.filter(lang_type=lang_type)
