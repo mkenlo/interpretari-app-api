@@ -1,8 +1,11 @@
 from django.urls import path, include
+from rest_framework import routers
+from .views import SentenceViewSet
 
-from .views import SentenceList, SentenceDetail
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'', SentenceViewSet, basename = 'sentence')
+
 
 urlpatterns = [
-    path("", SentenceList.as_view(), name="sentence_list"),
-    path("<int:pk>", SentenceDetail.as_view(), name="sentence_detail")
-] 
+    path(r'', include(router.urls))
+]

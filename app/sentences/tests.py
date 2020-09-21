@@ -3,12 +3,12 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import APIRequestFactory
-from .views import SentenceList, SentenceDetail
+from .views import SentenceViewSet
 from .models import Sentences
 from languages.models import Languages
 
 
-SENTENCE_URL = reverse('sentence_list')
+SENTENCE_URL = reverse('sentence-list')
 SAMPLE_TEXT = "Hello, Sample sentence"
 SAMPLE_LANG = "sample"
 
@@ -23,8 +23,8 @@ def sample_language():
 class SentenceAPITest(APITestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.view_list = SentenceList.as_view()
-        self.view_detail = SentenceDetail.as_view()
+        self.view_list = SentenceViewSet.as_view({'get':'list','post':'create'})
+        self.view_detail = SentenceViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})
 
 
     def test_list_all(self):     

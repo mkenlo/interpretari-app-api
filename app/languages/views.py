@@ -5,7 +5,7 @@ from rest_framework import viewsets
 # Create your views here.
 
 
-class LanguageList(ListCreateAPIView):
+class LanguageViewSet(viewsets.ModelViewSet):
     serializer_class = LanguageSerializer
     queryset = Languages.objects.all()
     
@@ -15,9 +15,3 @@ class LanguageList(ListCreateAPIView):
         if lang_type:
             queryset = queryset.filter(lang_type=lang_type)
         return queryset
-    
-    
-class LanguageDetail(RetrieveUpdateDestroyAPIView):
-    serializer_class = LanguageSerializer
-    queryset = Languages.objects.all()
-

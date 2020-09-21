@@ -2,11 +2,11 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 from rest_framework.test import APIRequestFactory
-from .views import LanguageList, LanguageDetail
+from .views import LanguageViewSet
 from .models import Languages
 
 
-LANGUAGE_URL = reverse('language_list')
+LANGUAGE_URL = reverse('language-list')
 
 
 def sample_language(code):
@@ -17,8 +17,8 @@ def sample_language(code):
 class LanguageTest(APITestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.view_list = LanguageList.as_view()
-        self.view_detail = LanguageDetail.as_view()
+        self.view_list = LanguageViewSet.as_view({'get': 'list','post': 'create'})
+        self.view_detail = LanguageViewSet.as_view({'get': 'retrieve', 'put': 'update', 'patch': 'partial_update', 'delete': 'destroy'})
         self.data = {"lang_name":"Sample", "lang_code":"SAM", "lang_type":"local"}
                
 

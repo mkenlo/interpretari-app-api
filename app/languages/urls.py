@@ -1,9 +1,11 @@
 from django.urls import path, include
 from rest_framework import routers
+from .views import LanguageViewSet
 
-from .views import LanguageList, LanguageDetail
+router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'', LanguageViewSet, basename = 'language')
+
 
 urlpatterns = [
-    path("", LanguageList.as_view(), name="language_list"),
-    path("<int:pk>", LanguageDetail.as_view(), name="language_detail")
-] 
+    path(r'', include(router.urls))
+]

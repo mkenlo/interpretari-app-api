@@ -6,7 +6,7 @@ from rest_framework import viewsets
 # Create your views here.
 
 
-class SentenceList(ListCreateAPIView):
+class SentenceViewSet(viewsets.ModelViewSet):
     serializer_class = SentenceSerializer
     queryset = Sentences.objects.all()
     
@@ -23,7 +23,3 @@ class SentenceList(ListCreateAPIView):
         lang = Languages.objects.filter(lang_name=name).first()
         serializer.save(sentence_lang = lang)
     
-class SentenceDetail(RetrieveUpdateDestroyAPIView):
-    serializer_class = SentenceSerializer
-    queryset = Sentences.objects.all()
-
