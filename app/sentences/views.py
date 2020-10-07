@@ -1,4 +1,3 @@
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from languages.models import Languages
 from .models import Sentences
 from .serializers import SentenceSerializer

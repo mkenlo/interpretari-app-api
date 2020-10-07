@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'languages',
-    'sentences'
+    'sentences',
+    'users',
+    'translations'
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = "/translations/files/"                                 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'files') 

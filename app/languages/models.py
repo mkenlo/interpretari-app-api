@@ -10,3 +10,7 @@ class Languages(models.Model):
     lang_code = models.CharField(max_length=3, unique=True)
     lang_name = models.CharField(max_length=100)
     lang_type = models.CharField(max_length=100, choices=LANG_TYPE,default='foreign')
+
+
+    def __str__(self):
+        return self.lang_name
