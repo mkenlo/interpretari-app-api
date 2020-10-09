@@ -10,7 +10,7 @@ from django.conf import settings
 from . import utils
 import os
 
-# Create your views here.
+
 class TranslationViewSet(viewsets.ModelViewSet):
     serializer_class = TranslationSerializer
     queryset = Translation.objects.all()
@@ -53,13 +53,14 @@ class TranslationViewSet(viewsets.ModelViewSet):
         )
 
 
-    @action(methods=['GET', 'POST'], detail=False, url_path="export/(?P<source>[^/]+)/(?P<target>[^/]+)")
+    @action(methods=['GET'], detail=False, url_path="export/(?P<source>[^/]+)/(?P<target>[^/]+)")
     def export(self, request, source, target):
         return Response(
             status = status.HTTP_200_OK,
             data = utils.export_translation_per_language(source, target)
         )
     
+
     @action(methods=['GET'], detail=False, url_path="files/(?P<filename>[^/]+)")
     def files(self, request, filename):
         return Response(
