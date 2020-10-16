@@ -15,6 +15,23 @@ class TranslationViewSet(viewsets.ModelViewSet):
     serializer_class = TranslationSerializer
     queryset = Translation.objects.all()
 
+    def get_queryset(self):
+       
+        queryset = Translation.objects.all()
+        userid = self.request.query_params.get('author', None)
+        sentenceid = self.request.query_params.get('sentence', None)
+        source_lang_id = self.request.query_params.get('source_language', None)
+        target_lang_id = self.request.query_params.get('target_language', None)
+        if userid:
+            queryset = queryset.filter(author__pk=userid)
+        if sentenceid:
+            queryset = queryset.filter(sentence__pk=sentenceid)
+        if source_lang_id:
+            queryset = queryset.filter(source_lang__pk=sentenceid)
+        if sentenceid:
+            queryset = queryset.filter(target_lang__pk=sentenceid)
+        return queryset
+
     def perform_create(self, serializer):
         
         target_lang_id = self.request.data.get('target_lang')         

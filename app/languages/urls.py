@@ -2,8 +2,8 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import LanguageViewSet
 
-router = routers.DefaultRouter(trailing_slash=False)
-router.register(r'', LanguageViewSet, basename = 'language')
+router = routers.SimpleRouter(trailing_slash=False)
+router.register(r'languages', LanguageViewSet, basename = 'language')
 
 
 urlpatterns = [
