@@ -15,8 +15,7 @@ class SentenceViewSet(viewsets.ModelViewSet):
         istranslated= self.request.query_params.get('istranslated')
         queryset = Sentences.objects.all()
         if lang_name:
-            lang = Languages.objects.filter(lang_name=lang_name).first()
-            queryset = queryset.filter(sentence_lang=lang)
+            queryset = queryset.filter(sentence_lang__lang_name=lang_name)
         if istranslated:
             if istranslated == "false":
                 queryset  = queryset.filter(translations__isnull=True)
