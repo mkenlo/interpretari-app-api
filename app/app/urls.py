@@ -21,7 +21,8 @@ urlpatterns = [
     path('', include('languages.urls')),
     path('', include('sentences.urls')),
     path('', include('translations.urls')),
-    path('', include('users.urls'))
+    path('', include('users.urls')),
+    path('', include('root.urls'))
 ]
 
 
