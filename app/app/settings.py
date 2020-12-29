@@ -25,7 +25,12 @@ SECRET_KEY = 's5i-69%mi@(b!bn=b5@3=0(-j^laj0kp+4p35pjj8apz4lfcox'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1','192.168.0.33', '192.168.0.58']
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    '192.168.0.33',
+    '192.168.0.58',
+    'interpretari-env.eba-yxmxxzmt.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -81,16 +86,30 @@ WSGI_APPLICATION = 'app.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'HOST': os.environ.get('INTERPRETARI_DB_HOST'),
-        'NAME': os.environ.get('INTERPRETARI_DB_NAME'),
-        'USER': os.environ.get('INTERPRETARI_DB_USER'),
-        'PASSWORD': os.environ.get('INTERPRETARI_DB_PASS'),
 
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'HOST': os.environ.get('INTERPRETARI_DB_HOST'),
+            'NAME': os.environ.get('INTERPRETARI_DB_NAME'),
+            'USER': os.environ.get('INTERPRETARI_DB_USER'),
+            'PASSWORD': os.environ.get('INTERPRETARI_DB_PASS'),
+
+        }
+    }
 
 
 # Password validation
@@ -132,4 +151,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 MEDIA_URL = "/translations/files/"                                 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'files') 
+MEDIA_ROOT = os.path.join(BASE_DIR,'..', 'uploads') 

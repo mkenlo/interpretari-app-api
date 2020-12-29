@@ -110,4 +110,9 @@ media/
 
 # documentation
 docs/
-app/files
+# Upload folder
+uploads/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
